@@ -4,8 +4,8 @@ MAINTAINER 9JKH Dev<dev@9jkh.co.za>
 ARG DEBIAN_FRONTEND=noninteractive
 ARG PACKAGE_NAME
 
-RUN curl -sSf https://files.9jkh.co.za/AD26AC18.asc | sudo apt-key add -
-RUN echo "deb https://dl.bintray.com/9jkh/gnupg stretch main" | sudo tee -a /etc/apt/sources.list.d/9jkh_gnupg.list
+RUN curl -sSf https://files.9jkh.co.za/AD26AC18.asc | apt-key add -
+RUN echo "deb https://dl.bintray.com/9jkh/gnupg stretch main" | tee -a /etc/apt/sources.list.d/9jkh_gnupg.list
 RUN apt-get update -qq
 
 # resolve package dependencies
@@ -16,4 +16,4 @@ ADD . /usr/src/builddir
 WORKDIR /usr/src/builddir
 
 RUN uscan --download-current-version
-RUN cd ../${PACKAGE_NAME}-* && dpkg-buildpackage > /dev/null
+RUN cd "$(find .. -type d -name ${PACKAGE_NAME}-\*)" && dpkg-buildpackage > /dev/null
