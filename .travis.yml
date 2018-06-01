@@ -1,0 +1,25 @@
+sudo: required
+
+language: minimal
+
+services:
+  - docker
+
+env:
+  global:
+    - PACKAGE_NAME: libassuan
+    - BINTRAY_PROJECT: 9jkh/gnupg
+    # BINTRAY_USER
+    - secure: "kHo+hiTf5UhaPLnJMvdzyuZWOtRbGTx//Af6VPCaJjwEVCNnyteaY9qdemJCF/Q4VD51mJxkXHazMNRn9mjOGmfbzIgtiP1hIlX6St+CRgCxFqPIsnATDU35TERm9mwTK4A7eDl+SduHaB5q9TXEThquh2wCIs/eV8otRu5XP7FT7yk+qxHnqM2iWXlBj5DAsGxCrIIvJtvwAYNAMXmiuVm3gUXGhUafV4p0VQ0jFSYeuRSxmzK3Opek2s7OeyfAeMqwN16Fu1B5mMj5XzUVITYU1aDgrowFMFtgt0NlRtWl62n27w1H/hS8yYvraLvr8bdO0N/Yctf2cqsKQ4KgSI22wq/ilR3GOKsCb/cpxa4wTDzXtSHGLOZnOK8Nsw5SUOJMRJvkarnZn+s1D1d10tnZeOUII9HdHPQf2AzQMXOfJmSwdlwuLMmko8u6BlRE36pujTx5c2QsZzVRXCgQH9GuzdI563c3CZhxi+0O9ILRY+WEIAyyFyiaeWC7Wvt7G0wH2nKq31SGnFBOkj8Dh38PjHQBpn4R+qxIVwG5hS9k20OhV6EwwYtWD/dB7l/KfVqLnhAZEBEkDFZRDp6dq8Zn9HamnBLMs3HNXR/0+RKhNe55vZ8o2gC72biJv+theFKZE00h33ESL4Iw8KEsWLnHdH41508MOYJi2X9ZCp4="
+    # BINTRAY_API_KEY
+    - secure: "adw2clzA7O7KUTAhvD9FM7vR9In8LB3bryaCeCAIS3/07ifvAQNVKZdZ7+MnYSK898QAN8mh0qa1yIkPmGFitDiDrwn3AI4rPrlFqoUPmtrhAnbfoMIe8Fsq4UPELaIwnNo3/RGIq19LcjueITtMRo5s4sbpA0fhFxxYT0z8F8S0SkNKofvxF/2h5b308qWrDUfJMNdMnUUeHei0CTS/ySB5xHPWv2EI50gl+cmc8n1ort7U5V/LYI8zERNQqF1z5rTNzeIDFstOD5a+mQlxHg9VH0eWj+NaJiWiMkSOK50zA3YgUgmNPJj2BjK3jOTDKCnt2N/DXrkHSrCCr5rbvwAJ9okWToOZCvKxzOYu7fdF9VRT0nGu7l8Y37bOrHNbTVfyHSCHlHbW6M7tQUko3Rzj7WGBXMO9aniM9uy1srzgQNCBimOdc6x4qrwdLePWGGx+pvyUmtDb/Us+4r1XPWDKqcPgJ6mxXiaOJeEWCWZSESqUt7ouV7AIt51az42xJo0jN2F7q+ZBtnd9XWEAdJWCdJPYpr+L0NVX6mvG1Sf8xNT1oCLGTCfH3rFV712Dn7KeMVplkEFc9IE2hPUjnWF3LiLRMewTE6T4qPvqfsT5xQ/i0b2GNzmOq16AJqjrmfkAsC+mWe65mHZBkAsoA4f9LgFaj6/hXhfsQTSPOKM="
+
+before_install:
+  - ./build.sh
+
+deploy:
+  provider: script
+  script: "./publish.sh"
+  skip_cleanup: true
+  on:
+    branch: master
